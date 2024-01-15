@@ -16,15 +16,16 @@ func (s *Server) LongGreet(stream pb.GreetService_LongGreetServer) error {
 		recv, err := stream.Recv()
 
 		if err == io.EOF {
-			stream.SendAndClose(&pb.GreetResponse{
+			return stream.SendAndClose(&pb.GreetResponse{
 				Result: res,
 			})
 		}
 
 		if err != nil {
-			log.Fatalf("Erro while reading response: %s/n", err)
+			log.Fatalf("Erro while reading response: %v\n", err)
 		}
 
-		res += fmt.Sprintf("Hello %s!/n", recv.FirstName)
+		log.Printf("Receiving req: %v\n", recv)
+		res += fmt.Sprintf("Hello %s!\n", recv.FirstName)
 	}
 }
