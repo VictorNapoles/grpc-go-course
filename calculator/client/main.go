@@ -20,6 +20,5 @@ func main() {
 
 	client := pb.NewCalculatorServiceClient(conn)
 
-	doSumCalculator(client)
-	doPrimeDecomposition(client)
+	doAverage(client)
 }
